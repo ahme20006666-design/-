@@ -214,26 +214,15 @@
             }
         }
 
-        /* MUSIC */
-
-        .music-icon {
-            font-size: 80px;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.1);
-            }
-        }
-
-        audio {
-            width: min(90vw, 400px);
-            margin-top: 20px;
+        .final-box {
+            background: rgba(255, 61, 129, 0.2);
+            border: 1px solid #ff3d81;
+            padding: 12px 25px;
+            border-radius: 30px;
+            margin-bottom: 25px;
+            font-size: 18px;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(255, 61, 129, 0.4);
         }
 
         .final-text {
@@ -251,7 +240,7 @@
         المتصفح لا يدعم تشغيل الصوت.
     </audio>
 
-    <!-- PASSWORD -->
+    <!-- 1. PASSWORD SCREEN -->
     <section id="passwordScreen" class="screen active">
 
         <div class="lock">🔐</div>
@@ -276,7 +265,7 @@
     </section>
 
 
-    <!-- BIRTHDAY -->
+    <!-- 2. BIRTHDAY SCREEN -->
     <section id="birthdayScreen" class="screen">
 
         <div class="birthday-title">
@@ -298,7 +287,7 @@
     </section>
 
 
-    <!-- LETTER -->
+    <!-- 3. LETTER SCREEN -->
     <section id="letterScreen" class="screen">
 
         <div class="letter">
@@ -336,7 +325,7 @@
     </section>
 
 
-    <!-- COUNTER -->
+    <!-- 4. COUNTER SCREEN -->
     <section id="counterScreen" class="screen">
 
         <div class="counter-title">
@@ -377,7 +366,7 @@
     </section>
 
 
-    <!-- OUR PHOTO -->
+    <!-- 5. OUR PHOTO SCREEN -->
     <section id="usScreen" class="screen">
 
         <h1>دي اكتر صوره بحبها ملكيش دعوه انتي 🫠 ❤️</h1>
@@ -390,34 +379,26 @@
 
         <div class="heart">❤️</div>
 
-        <button onclick="nextScreen('musicScreen')">
-            في حاجة أخيرة 
-            بحبك كتييييييييير ❤️
+        <button onclick="nextScreen('finalScreen')">
+            في حاجة أخيرة.. بحبك كتييييييييير ❤️
         </button>
 
     </section>
 
 
-    <!-- MUSIC (تم تصحيح القسم وإعادة بنائه واحتواء الزر داخله) -->
-    <
-
-        <div class="heart">❤️</div>
-
-        <button onclick="finish()">
-             خلصت ❤️ كدا حاجه صغيره يرب تكون عجبتك 
-        </button>
-
-    </section>
-
-
-    <!-- FINAL -->
+    <!-- 6. FINAL SCREEN -->
     <section id="finalScreen" class="screen">
 
+        <div class="final-box">
+            خلصت ❤️ كدا حاجه صغيره يارب تكون عجبتك
+        </div>
+
+        <div class="heart">🤍</div>
+
         <div class="final-text">
-            🤍<br>
             كل سنة وإنتِ حبيبتي<br>
             وكل سنة وإحنا مع بعض<br>
-            ❤️<br>
+            <div class="heart">❤️</div>
             Happy Birthday Rahma 🎂
         </div>
 
@@ -476,7 +457,6 @@
 
         // =========================
         // LOVE COUNTER
-        // 11/04/2024 - 00:00
         // =========================
 
         const loveDate = new Date("2024-04-11T00:00:00");
@@ -503,15 +483,6 @@
 
         updateCounter();
         setInterval(updateCounter, 1000);
-
-
-        // =========================
-        // FINAL
-        // =========================
-
-        function finish() {
-            nextScreen("finalScreen");
-        }
     </script>
 
 </body>

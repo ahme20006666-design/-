@@ -245,6 +245,12 @@
 
 <body>
 
+    <!-- مشغل الصوت المخفي للتشغيل التلقائي -->
+    <audio id="song" loop preload="auto">
+        <source src="hhh3.mp3" type="audio/mpeg">
+        المتصفح لا يدعم تشغيل الصوت.
+    </audio>
+
     <!-- PASSWORD -->
     <section id="passwordScreen" class="screen active">
 
@@ -278,7 +284,7 @@
 
         <div class="hanging">
             <img
-                src="birthday.png"
+                src="1787849909083.png"
                 class="birthday-img"
                 alt="Rahma"
             >
@@ -375,7 +381,7 @@
         <h1>إحنا ❤️</h1>
 
         <img
-            src="us.png"
+            src="1787850579049.png"
             class="our-photo"
             alt="Us"
         >
@@ -397,11 +403,6 @@
         <h1>اسمعي دي للآخر ❤️</h1>
 
         <p>الأغنية دي مخصوص ليكي</p>
-
-        <audio id="song" controls>
-            <source src="hhh3.mp3" type="audio/mpeg">
-            المتصفح لا يدعم تشغيل الصوت.
-        </audio>
 
         <button onclick="finish()">
             خلصت ❤️
@@ -425,24 +426,33 @@
 
 
     <script>
+        const song = document.getElementById("song");
+
+        // دالة تشغيل الصوت
+        function startAudio() {
+            song.play().catch(() => {});
+        }
+
+        // تشغيل الأغنية فور فتح الرابط مع تجاوز حظر المتصفحات
+        window.addEventListener("DOMContentLoaded", () => {
+            song.play().catch(() => {
+                document.addEventListener("click", startAudio, { once: true });
+                document.addEventListener("touchstart", startAudio, { once: true });
+            });
+        });
 
         // =========================
         // PASSWORD
         // =========================
 
         function checkPassword() {
-
-            const password =
-                document.getElementById("password").value;
+            startAudio(); // للتأكيد على تشغيل الصوت عند الضغط على دخول
+            const password = document.getElementById("password").value;
 
             if (password === "Love") {
-
                 nextScreen("birthdayScreen");
-
             } else {
-
                 document.getElementById("error").style.display = "block";
-
             }
         }
 
@@ -452,13 +462,11 @@
         // =========================
 
         function nextScreen(screenId) {
-
             document.querySelectorAll(".screen").forEach(screen => {
                 screen.classList.remove("active");
             });
 
             document.getElementById(screenId).classList.add("active");
-
             window.scrollTo(0, 0);
         }
 
@@ -468,57 +476,29 @@
         // 11/04/2024 - 00:00
         // =========================
 
-        const loveDate =
-            new Date("2024-04-11T00:00:00");
-
+        const loveDate = new Date("2024-04-11T00:00:00");
 
         function updateCounter() {
-
             const now = new Date();
-
-            let difference =
-                now.getTime() - loveDate.getTime();
+            let difference = now.getTime() - loveDate.getTime();
 
             if (difference < 0) {
                 difference = 0;
             }
 
-            const totalSeconds =
-                Math.floor(difference / 1000);
+            const totalSeconds = Math.floor(difference / 1000);
+            const days = Math.floor(totalSeconds / 86400);
+            const hours = Math.floor((totalSeconds % 86400) / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
 
-            const days =
-                Math.floor(totalSeconds / 86400);
-
-            const hours =
-                Math.floor(
-                    (totalSeconds % 86400) / 3600
-                );
-
-            const minutes =
-                Math.floor(
-                    (totalSeconds % 3600) / 60
-                );
-
-            const seconds =
-                totalSeconds % 60;
-
-
-            document.getElementById("days").textContent =
-                days;
-
-            document.getElementById("hours").textContent =
-                hours;
-
-            document.getElementById("minutes").textContent =
-                minutes;
-
-            document.getElementById("seconds").textContent =
-                seconds;
+            document.getElementById("days").textContent = days;
+            document.getElementById("hours").textContent = hours;
+            document.getElementById("minutes").textContent = minutes;
+            document.getElementById("seconds").textContent = seconds;
         }
 
-
         updateCounter();
-
         setInterval(updateCounter, 1000);
 
 
@@ -527,17 +507,11 @@
         // =========================
 
         function finish() {
-
-            const song =
-                document.getElementById("song");
-
             song.pause();
-
             nextScreen("finalScreen");
         }
-
     </script>
 
 </body>
 
-  </html>
+</html>

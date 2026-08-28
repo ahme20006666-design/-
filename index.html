@@ -262,6 +262,7 @@
             type="password"
             id="password"
             placeholder="Password"
+            onkeydown="if(event.key === 'Enter') checkPassword()"
         >
 
         <button onclick="checkPassword()">
@@ -339,8 +340,8 @@
     <section id="counterScreen" class="screen">
 
         <div class="counter-title">
-           بنحب بعض بقالنا قد إيه؟؟؟
-            من يوم 11/04/2024 ❤️
+           بنحب بعض بقالنا قد إيه؟؟؟<br>
+           من يوم 11/04/2024 ❤️
         </div>
 
         <div class="counter">
@@ -391,16 +392,19 @@
 
         <button onclick="nextScreen('musicScreen')">
             في حاجة أخيرة 
-            بحبك كتييييييييير
+            بحبك كتييييييييير ❤️
         </button>
 
     </section>
 
 
-    
+    <!-- MUSIC (تم تصحيح القسم وإعادة بنائه واحتواء الزر داخله) -->
+    <
+
+        <div class="heart">❤️</div>
 
         <button onclick="finish()">
-         
+             خلصت ❤️ كدا حاجه صغيره يرب تكون عجبتك 
         </button>
 
     </section>
@@ -441,10 +445,11 @@
         // =========================
 
         function checkPassword() {
-            startAudio(); // للتأكيد على تشغيل الصوت عند الضغط على دخول
-            const password = document.getElementById("password").value;
+            startAudio();
+            const password = document.getElementById("password").value.trim();
 
-            if (password === "Love") {
+            if (password === "Love" || password === "love") {
+                document.getElementById("error").style.display = "none";
                 nextScreen("birthdayScreen");
             } else {
                 document.getElementById("error").style.display = "block";
@@ -461,8 +466,11 @@
                 screen.classList.remove("active");
             });
 
-            document.getElementById(screenId).classList.add("active");
-            window.scrollTo(0, 0);
+            const target = document.getElementById(screenId);
+            if (target) {
+                target.classList.add("active");
+                window.scrollTo(0, 0);
+            }
         }
 
 
@@ -502,7 +510,6 @@
         // =========================
 
         function finish() {
-            song.pause();
             nextScreen("finalScreen");
         }
     </script>

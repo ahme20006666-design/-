@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Love's Birthday ❤️</title>
 
     <style>
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            margin: 0;
             min-height: 100vh;
             background: linear-gradient(135deg, #12000a, #3b001f, #12000a);
             color: white;
@@ -33,7 +33,7 @@
 
         .screen.active {
             display: flex;
-            animation: fadeIn 1s ease;
+            animation: fadeIn 0.8s ease;
         }
 
         @keyframes fadeIn {
@@ -41,15 +41,13 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        /* PASSWORD */
-
+        /* 1. PASSWORD */
         .lock {
             font-size: 70px;
             margin-bottom: 15px;
@@ -57,6 +55,7 @@
 
         h1 {
             margin-bottom: 25px;
+            font-size: 26px;
         }
 
         input {
@@ -70,29 +69,30 @@
         }
 
         button {
-            margin-top: 18px;
-            padding: 13px 30px;
+            margin-top: 20px;
+            padding: 14px 32px;
             border: none;
             border-radius: 30px;
             background: #ff3d81;
             color: white;
             font-size: 17px;
             cursor: pointer;
-            box-shadow: 0 5px 20px rgba(255, 61, 129, .4);
+            box-shadow: 0 5px 20px rgba(255, 61, 129, 0.4);
+            transition: transform 0.2s;
         }
 
         button:active {
-            transform: scale(.95);
+            transform: scale(0.95);
         }
 
         .error {
             color: #ff8fab;
-            margin-top: 10px;
+            margin-top: 12px;
             display: none;
+            font-size: 16px;
         }
 
-        /* BIRTHDAY */
-
+        /* 2. BIRTHDAY */
         .birthday-title {
             font-size: 32px;
             margin-bottom: 30px;
@@ -120,29 +120,27 @@
             object-fit: cover;
             border-radius: 20px;
             border: 4px solid white;
-            box-shadow: 0 0 30px rgba(255, 100, 160, .5);
+            box-shadow: 0 0 30px rgba(255, 100, 160, 0.5);
         }
 
         @keyframes swing {
             0%, 100% {
                 transform: rotate(4deg);
             }
-
             50% {
                 transform: rotate(-4deg);
             }
         }
 
-        /* LETTER */
-
+        /* 3. LETTER */
         .letter {
             max-width: 700px;
             width: 100%;
             background: #fff8ed;
             color: #35151d;
             padding: 35px 25px;
-            border-radius: 8px;
-            box-shadow: 0 10px 40px rgba(0,0,0,.5);
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
             line-height: 2.1;
             font-size: 17px;
             text-align: right;
@@ -150,14 +148,14 @@
 
         .letter h2 {
             text-align: center;
-            margin-top: 0;
+            margin-bottom: 15px;
         }
 
-        /* COUNTER */
-
+        /* 4. COUNTER */
         .counter-title {
-            font-size: 28px;
+            font-size: 26px;
             margin-bottom: 30px;
+            line-height: 1.6;
         }
 
         .counter {
@@ -169,16 +167,16 @@
         }
 
         .box {
-            min-width: 90px;
-            padding: 18px 12px;
-            background: rgba(255,255,255,.1);
-            border: 1px solid rgba(255,255,255,.2);
+            min-width: 85px;
+            padding: 16px 12px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
             border-radius: 15px;
             backdrop-filter: blur(10px);
         }
 
         .number {
-            font-size: 30px;
+            font-size: 28px;
             font-weight: bold;
         }
 
@@ -187,15 +185,14 @@
             color: #ffb6ce;
         }
 
-        /* OUR PHOTO */
-
+        /* 5. OUR PHOTO */
         .our-photo {
-            width: min(90vw, 400px);
-            max-height: 70vh;
+            width: min(90vw, 380px);
+            max-height: 65vh;
             object-fit: cover;
             border-radius: 25px;
             border: 4px solid white;
-            box-shadow: 0 0 40px rgba(255, 70, 130, .5);
+            box-shadow: 0 0 40px rgba(255, 70, 130, 0.5);
         }
 
         .heart {
@@ -208,25 +205,25 @@
             0%, 100% {
                 transform: scale(1);
             }
-
             50% {
                 transform: scale(1.2);
             }
         }
 
+        /* 6. FINAL SCREEN */
         .final-box {
             background: rgba(255, 61, 129, 0.2);
             border: 1px solid #ff3d81;
             padding: 12px 25px;
             border-radius: 30px;
-            margin-bottom: 25px;
+            margin-top: 25px;
             font-size: 18px;
             color: #fff;
             box-shadow: 0 0 15px rgba(255, 61, 129, 0.4);
         }
 
         .final-text {
-            font-size: 25px;
+            font-size: 24px;
             line-height: 1.8;
         }
     </style>
@@ -234,66 +231,32 @@
 
 <body>
 
-    <!-- مشغل الصوت المخفي للتشغيل التلقائي -->
     <audio id="song" loop preload="auto">
         <source src="hhh3.mp3" type="audio/mpeg">
-        المتصفح لا يدعم تشغيل الصوت.
     </audio>
 
-    <!-- 1. PASSWORD SCREEN -->
+    <!-- SCREEN 1: PASSWORD -->
     <section id="passwordScreen" class="screen active">
-
         <div class="lock">🔐</div>
-
         <h1>ادخلي كلمة السر ❤️</h1>
-
-        <input
-            type="password"
-            id="password"
-            placeholder="Password"
-            onkeydown="if(event.key === 'Enter') checkPassword()"
-        >
-
-        <button onclick="checkPassword()">
-            دخول ❤️
-        </button>
-
-        <div id="error" class="error">
-            كلمة السر غلط 😌
-        </div>
-
+        <input type="password" id="password" placeholder="Password" onkeydown="if(event.key === 'Enter') checkPassword()">
+        <button onclick="checkPassword()">دخول ❤️</button>
+        <div id="error" class="error">كلمة السر غلط 😌</div>
     </section>
 
-
-    <!-- 2. BIRTHDAY SCREEN -->
+    <!-- SCREEN 2: BIRTHDAY -->
     <section id="birthdayScreen" class="screen">
-
-        <div class="birthday-title">
-            𝐻𝑎𝑝𝑝𝑦 𝐵𝑖𝑟𝑡ℎ𝑑𝑎𝑦 Rahma 🎂✨
-        </div>
-
+        <div class="birthday-title">𝐻𝑎𝑝𝑝𝑦 𝐵𝑖𝑟𝑡ℎ𝑑𝑎𝑦 Rahma 🎂✨</div>
         <div class="hanging">
-            <img
-                src="6677.png"
-                class="birthday-img"
-                alt="Rahma"
-            >
+            <img src="6677.png" class="birthday-img" alt="Rahma">
         </div>
-
-        <button onclick="nextScreen('letterScreen')">
-            في حاجة ليكي 💌
-        </button>
-
+        <button onclick="nextScreen('letterScreen')">في حاجة ليكي 💌</button>
     </section>
 
-
-    <!-- 3. LETTER SCREEN -->
+    <!-- SCREEN 3: LETTER -->
     <section id="letterScreen" class="screen">
-
         <div class="letter">
-
             <h2>💌 رسالة ليكي</h2>
-
             <p>
                 أُحِــــبُّــــكِ..<br>
                 وَأَرَى أَنَّ كُــــلَّ مَــــا يُــــقَــــالُ فِــــي المَـــحَـــبَّـــة
@@ -315,115 +278,73 @@
                 🤍 كُـــلُّ عَـــامٍ وَأَنْـــتِ حَـــبِـــيـــبَـــتِـــي
                 فِـــي كُـــلِّ الأَعْـــوَامِ 🤍
             </p>
-
         </div>
-
-        <button onclick="nextScreen('counterScreen')">
-            كمّلّي ❤️
-        </button>
-
+        <button onclick="nextScreen('counterScreen')">كمّلّي ❤️</button>
     </section>
 
-
-    <!-- 4. COUNTER SCREEN -->
+    <!-- SCREEN 4: COUNTER -->
     <section id="counterScreen" class="screen">
-
         <div class="counter-title">
-           بنحب بعض بقالنا قد إيه؟؟؟<br>
-           من يوم 11/04/2024 ❤️
+            بنحب بعض بقالنا قد إيه؟؟؟<br>
+            من يوم 11/04/2024 ❤️
         </div>
-
         <div class="counter">
-
             <div class="box">
                 <div class="number" id="days">0</div>
                 <div class="label">يوم</div>
             </div>
-
             <div class="box">
                 <div class="number" id="hours">0</div>
                 <div class="label">ساعة</div>
             </div>
-
             <div class="box">
                 <div class="number" id="minutes">0</div>
                 <div class="label">دقيقة</div>
             </div>
-
             <div class="box">
                 <div class="number" id="seconds">0</div>
                 <div class="label">ثانية</div>
             </div>
-
         </div>
-
         <div class="heart">❤️</div>
-
-        <button onclick="nextScreen('usScreen')">
-            ولسه الحكاية مكملة 🫶
-        </button>
-
+        <button onclick="nextScreen('usScreen')">ولسه الحكاية مكملة 🫶</button>
     </section>
 
-
-    <!-- 5. OUR PHOTO SCREEN -->
+    <!-- SCREEN 5: OUR PHOTO -->
     <section id="usScreen" class="screen">
-
         <h1>دي اكتر صوره بحبها ملكيش دعوه انتي 🫠 ❤️</h1>
-
-        <img
-            src="1787849909083.png"
-            class="our-photo"
-            alt="Us"
-        >
-
+        <img src="1787849909083.png" class="our-photo" alt="Us">
         <div class="heart">❤️</div>
-
-        <button onclick="nextScreen('finalScreen')">
-            في حاجة أخيرة.. بحبك كتييييييييير ❤️
-        </button>
-
+        <button onclick="nextScreen('finalScreen')">في حاجة أخيرة.. بحبك كتييييييييير ❤️</button>
     </section>
 
-
-    <!-- 6. FINAL SCREEN -->
+    <!-- SCREEN 6: FINAL SCREEN ONLY -->
     <section id="finalScreen" class="screen">
-
-        <div class="final-box">
-            خلصت ❤️ كدا حاجه صغيره يارب تكون عجبتك
-        </div>
-
         <div class="heart">🤍</div>
-
         <div class="final-text">
             كل سنة وإنتِ حبيبتي<br>
             وكل سنة وإحنا مع بعض<br>
             <div class="heart">❤️</div>
             Happy Birthday Rahma 🎂
         </div>
-
+        <div class="final-box">
+            خلصت ❤️ كدا حاجه صغيره يارب تكون عجبتك
+        </div>
     </section>
-
 
     <script>
         const song = document.getElementById("song");
 
-        // دالة تشغيل الصوت
         function startAudio() {
             song.play().catch(() => {});
         }
 
-        // تشغيل الأغنية فور فتح الرابط مع تجاوز حظر المتصفحات
         window.addEventListener("DOMContentLoaded", () => {
             song.play().catch(() => {
                 document.addEventListener("click", startAudio, { once: true });
                 document.addEventListener("touchstart", startAudio, { once: true });
             });
         });
-
-        // =========================
-        // PASSWORD
-        // =========================
 
         function checkPassword() {
             startAudio();
@@ -437,11 +358,6 @@
             }
         }
 
-
-        // =========================
-        // CHANGE SCREEN
-        // =========================
-
         function nextScreen(screenId) {
             document.querySelectorAll(".screen").forEach(screen => {
                 screen.classList.remove("active");
@@ -454,20 +370,13 @@
             }
         }
 
-
-        // =========================
-        // LOVE COUNTER
-        // =========================
-
         const loveDate = new Date("2024-04-11T00:00:00");
 
         function updateCounter() {
             const now = new Date();
             let difference = now.getTime() - loveDate.getTime();
 
-            if (difference < 0) {
-                difference = 0;
-            }
+            if (difference < 0) difference = 0;
 
             const totalSeconds = Math.floor(difference / 1000);
             const days = Math.floor(totalSeconds / 86400);
